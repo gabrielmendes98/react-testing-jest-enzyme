@@ -1,2 +1,3 @@
 # react-testing-jest-enzyme
-Testing React apps that uses Typescript, Hooks and Context Code with Test Driven Development
+
+Test Driven Development of React apps that uses Typescript, Hooks and Context.
