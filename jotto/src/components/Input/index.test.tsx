@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import { findByTestAttr } from '../../../tests/testUtils';
 import Input from './index';
 
-const setup = () => shallow(<Input />);
+const setup = (props = { secretWord: 'party' }) => shallow(<Input {...props} />);
 
 test('input renders without error', () => {
   const wrapper = setup();

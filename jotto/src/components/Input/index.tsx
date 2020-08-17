@@ -1,6 +1,10 @@
 import React from 'react';
 
-const Input = () => {
+interface Props {
+  secretWord: string;
+}
+
+const Input: React.FC<Props> = ({ secretWord }) => {
   return <div data-test="component-input"></div>;
 };
 
