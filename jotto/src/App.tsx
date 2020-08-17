@@ -6,7 +6,7 @@ import Congrats from './components/Congrats';
 
 function App() {
   return (
-    <div className="App">
+    <div data-test="component-app" className="App">
       <h1>Jotto</h1>
       <Congrats success={true} />
       <GuessedWords
