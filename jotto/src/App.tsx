@@ -1,7 +1,10 @@
 import React from 'react';
 import hookActions from './actions/hookActions';
 
+import Loader from 'react-loader-spinner';
+
 import './App.css';
+import Input from './components/Input';
 
 type Action = {
   type: 'setSecretWord';
@@ -30,10 +33,13 @@ function App() {
     hookActions.getSecretWord(setSecretWord);
   }, []);
 
-  return (
+  return state.secretWord ? (
     <div data-test="component-app" className="App">
       <h1>Jotto</h1>
+      <Input secretWord={state.secretWord} />
     </div>
+  ) : (
+    <Loader data-test="spinner" type="Puff" color="#00BFFF" height={100} width={100} />
   );
 }
 
