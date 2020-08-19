@@ -14,7 +14,7 @@ const LanguagePicker: React.FC<Props> = ({ setLanguage }) => {
     <div data-test="component-language-picker">
       {languages.map((language) => (
         <span data-test="language-icon" key={language.code} onClick={() => setLanguage(language.code)}>
-          {language.symbol}
+          {language.symbol}{' '}
         </span>
       ))}
     </div>
