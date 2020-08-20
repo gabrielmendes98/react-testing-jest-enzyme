@@ -7,7 +7,7 @@ interface Props {
 const LanguagePicker: React.FC<Props> = ({ setLanguage }) => {
   const languages = [
     { code: 'en', symbol: 'us' },
-    { code: 'br', symbol: 'br' },
+    { code: 'pt', symbol: 'pt' },
   ];
 
   return (
