@@ -1,5 +1,8 @@
 import React from 'react';
 
+import languageContext from '../../contexts/language';
+import stringsModule from '../../lib/strings';
+
 interface GuessedWord {
   guessedWord: string;
   letterMatchCount: number;
@@ -10,18 +13,19 @@ interface Props {
 }
 
 const GuessedWords: React.FC<Props> = ({ guessedWords }) => {
+  const language = React.useContext(languageContext);
   return (
     <div data-test="component-guessed-words">
       {guessedWords.length === 0 ? (
-        <span data-test="guess-instructions">Try to guess the secret word!</span>
+        <span data-test="guess-instructions">{stringsModule.getStringByLanguage(language, 'guessPrompt')}</span>
       ) : (
         <div data-test="guessed-words">
-          <h3>Guessed Words</h3>
+          <h3>{stringsModule.getStringByLanguage(language, 'guessedWords')}</h3>
           <table>
             <thead>
               <tr>
-                <th>Guess</th>
-                <th>Matching Letters</th>
+                <th>{stringsModule.getStringByLanguage(language, 'guessColumnHeader')}</th>
+                <th>{stringsModule.getStringByLanguage(language, 'mathingLettersColumnHeader')}</th>
               </tr>
             </thead>
             <tbody>
