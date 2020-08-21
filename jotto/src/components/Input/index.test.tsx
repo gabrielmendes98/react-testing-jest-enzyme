@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
-import { shallow, ShallowWrapper } from 'enzyme';
+import React from 'react';
+import { mount, ReactWrapper } from 'enzyme';
 
 import { findByTestAttr } from '../../../tests/testUtils';
 import Input from './index';
+import languageContext from '../../contexts/language';
 
-const setup = (props = { secretWord: 'party' }) => shallow(<Input {...props} />);
+const setup = ({ secretWord = 'party', language = 'en' } = {}) =>
+  mount(
+    <languageContext.Provider value={language}>
+      <Input secretWord={secretWord} />
+    </languageContext.Provider>
+  );
 
 test('input renders without error', () => {
   const wrapper = setup();
@@ -14,7 +20,7 @@ test('input renders without error', () => {
 
 describe('state controlled input field', () => {
   const mockSetCurrentGuess = jest.fn();
-  let wrapper: ShallowWrapper;
+  let wrapper: ReactWrapper;
 
   beforeEach(() => {
     mockSetCurrentGuess.mockClear();
@@ -35,5 +41,31 @@ describe('state controlled input field', () => {
 
     submitButton.simulate('click', { preventDefault() {} });
     expect(mockSetCurrentGuess).toHaveBeenCalledWith('');
+  });
+});
+
+describe('language context', () => {
+  test('correctly renders input placeholder in english', () => {
+    const wrapper = setup({ language: 'en' });
+    const input = findByTestAttr(wrapper, 'input-box');
+    expect(input.props().placeholder).toEqual('enter guess');
+  });
+
+  test('correctly renders input placeholder in pt', () => {
+    const wrapper = setup({ language: 'pt' });
+    const input = findByTestAttr(wrapper, 'input-box');
+    expect(input.props().placeholder).toEqual('digite seu palpite');
+  });
+
+  test('correctly renders submit button in english', () => {
+    const wrapper = setup({ language: 'en' });
+    const button = findByTestAttr(wrapper, 'submit-button');
+    expect(button.text()).toEqual('Submit');
+  });
+
+  test('correctly renders submit button in pt', () => {
+    const wrapper = setup({ language: 'pt' });
+    const button = findByTestAttr(wrapper, 'submit-button');
+    expect(button.text()).toEqual('Enviar');
   });
 });
