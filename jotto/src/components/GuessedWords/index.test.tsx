@@ -79,12 +79,12 @@ describe('language context', () => {
     expect(guessInstructions.text()).toEqual('Try to guess the secret word!');
   });
 
-  // test('correctly renders guess instructions string in pt', () => {
-  //   const mockUseContext = jest.fn().mockReturnValue('pt');
-  //   React.useContext = mockUseContext;
+  test('correctly renders guess instructions string in pt', () => {
+    const mockUseContext = jest.fn().mockReturnValue('pt');
+    React.useContext = mockUseContext;
 
-  //   const wrapper = setup();
-  //   const guessInstructions = findByTestAttr(wrapper, 'guess-instructions');
-  //   expect(guessInstructions.text()).toEqual('Tente adivinhar a palavra!');
-  // });
+    const wrapper = setup();
+    const guessInstructions = findByTestAttr(wrapper, 'guess-instructions');
+    expect(guessInstructions.text()).toEqual('Tente adivinhar a palavra!');
+  });
 });
