@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
-const guessedWordsContext = React.createContext('');
+interface GuessedWord {
+  guessedWord: string;
+  letterMatchCount: number;
+}
+
+interface ContextProps {
+  guessedWords: GuessedWord[];
+  setGuessedWords: React.Dispatch<React.SetStateAction<GuessedWord[]>>;
+}
+
+const guessedWordsContext = React.createContext<ContextProps | undefined>(undefined);
 
 export function useGuessedWords() {
-  const context = React.useContext(guessedWordsContext);
+  const context = useContext(guessedWordsContext);
 
   if (!context) {
     throw new Error('useGuessedWords must be used within a GuessedWordsProvider');
@@ -13,11 +23,11 @@ export function useGuessedWords() {
 }
 
 export function GuessedWordsProvider(props: any) {
-  const [guessedWords, setGuessedWords] = React.useState([]);
+  const [guessedWords, setGuessedWords] = React.useState([] as GuessedWord[]);
 
-  const value = React.useMemo(() => [guessedWords, setGuessedWords], [guessedWords]);
+  const value = React.useMemo(() => ({ guessedWords, setGuessedWords }), [guessedWords]);
 
-  return <guessedWordsContext.Provider value={value} {...props} />;
+  return <guessedWordsContext.Provider value={value} {...props}></guessedWordsContext.Provider>;
 }
 
 export default { GuessedWordsProvider, useGuessedWords };

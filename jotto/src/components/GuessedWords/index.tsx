@@ -2,17 +2,10 @@ import React from 'react';
 
 import languageContext from '../../contexts/language';
 import stringsModule from '../../lib/strings';
+import guessedWordsContext from '../../contexts/guessedWords';
 
-interface GuessedWord {
-  guessedWord: string;
-  letterMatchCount: number;
-}
-
-interface Props {
-  guessedWords: GuessedWord[];
-}
-
-const GuessedWords: React.FC<Props> = ({ guessedWords }) => {
+const GuessedWords = () => {
+  const { guessedWords } = guessedWordsContext.useGuessedWords();
   const language = React.useContext(languageContext);
   return (
     <div data-test="component-guessed-words">

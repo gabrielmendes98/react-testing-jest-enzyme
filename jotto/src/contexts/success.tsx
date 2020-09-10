@@ -2,7 +2,7 @@ import React from 'react';
 
 const successContext = React.createContext([] as (boolean | React.Dispatch<React.SetStateAction<boolean>>)[]);
 
-function useSuccess() {
+const useSuccess = () => {
   const context = React.useContext(successContext);
 
   if (context.length === 0) {
@@ -10,7 +10,7 @@ function useSuccess() {
   }
 
   return context;
-}
+};
 
 const SuccessProvider: React.FC = (props) => {
   const [success, setSuccess] = React.useState(false);
