@@ -2,12 +2,10 @@ import React from 'react';
 
 import languageContext from '../../contexts/language';
 import stringsModule from '../../lib/strings';
+import successContext from '../../contexts/success';
 
-interface Params {
-  success: boolean;
-}
-
-const Congrats: React.FC<Params> = ({ success }) => {
+const Congrats = () => {
+  const [success] = React.useContext(successContext);
   const language = React.useContext(languageContext);
   return (
     <div data-test="component-congrats">

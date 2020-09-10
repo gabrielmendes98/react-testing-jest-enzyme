@@ -7,6 +7,9 @@ import './App.css';
 import Input from './components/Input';
 import languageContext from './contexts/language';
 import LanguagePicker from './components/LanguagePicker';
+import { SuccessProvider } from './contexts/success';
+import Congrats from './components/Congrats';
+import GuessedWords from './components/GuessedWords';
 
 type Action = {
   type: 'setSecretWord' | 'setLanguage';
@@ -44,7 +47,11 @@ function App() {
       <h1>Jotto</h1>
       <languageContext.Provider value={state.language}>
         <LanguagePicker setLanguage={setLanguage} />
-        <Input secretWord={state.secretWord} />
+        <SuccessProvider>
+          <Congrats />
+          <Input secretWord={state.secretWord} />
+        </SuccessProvider>
+        {/* <GuessedWords /> */}
       </languageContext.Provider>
     </div>
   ) : (
