@@ -15,6 +15,7 @@ const Input: React.FC<Props> = ({ secretWord }) => {
 
   function handleSubmit(e: React.MouseEvent) {
     e.preventDefault();
+    if (secretWord === currentGuess) setSuccess(true);
     setCurrentGuess('');
   }
 

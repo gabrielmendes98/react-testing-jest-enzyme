@@ -75,5 +75,5 @@ describe('language context', () => {
 
 test('input component does not show when success is true', () => {
   const wrapper = setup({ secretWord: 'party', success: true });
-  expect(wrapper.isEmptyRender).toBe(true);
+  expect(wrapper.isEmptyRender()).toBe(true);
 });
