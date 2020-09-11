@@ -3,6 +3,8 @@ import React from 'react';
 import languageContext from '../../contexts/language';
 import stringsModule from '../../lib/strings';
 import successContext from '../../contexts/success';
+import guessedWordsContext from '../../contexts/guessedWords';
+import { getLetterMatchCount } from '../../utils';
 
 interface Props {
   secretWord: string;
@@ -10,12 +12,17 @@ interface Props {
 
 const Input: React.FC<Props> = ({ secretWord }) => {
   const { success, setSuccess } = successContext.useSuccess();
+  const { guessedWords, setGuessedWords } = guessedWordsContext.useGuessedWords();
   const language = React.useContext(languageContext);
   const [currentGuess, setCurrentGuess] = React.useState('');
 
   function handleSubmit(e: React.MouseEvent) {
     e.preventDefault();
     if (secretWord === currentGuess) setSuccess(true);
+
+    const letterMatchCount = getLetterMatchCount(currentGuess, secretWord);
+    setGuessedWords([...guessedWords, { guessedWord: currentGuess, letterMatchCount }]);
+
     setCurrentGuess('');
   }
 
