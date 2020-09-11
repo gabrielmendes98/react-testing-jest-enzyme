@@ -2,12 +2,14 @@ import React from 'react';
 
 import languageContext from '../../contexts/language';
 import stringsModule from '../../lib/strings';
+import successContext from '../../contexts/success';
 
 interface Props {
   secretWord: string;
 }
 
 const Input: React.FC<Props> = ({ secretWord }) => {
+  const { success, setSuccess } = successContext.useSuccess();
   const language = React.useContext(languageContext);
   const [currentGuess, setCurrentGuess] = React.useState('');
 
@@ -15,6 +17,8 @@ const Input: React.FC<Props> = ({ secretWord }) => {
     e.preventDefault();
     setCurrentGuess('');
   }
+
+  if (success) return null;
 
   return (
     <div data-test="component-input">

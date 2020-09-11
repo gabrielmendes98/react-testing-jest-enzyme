@@ -7,7 +7,7 @@ import './App.css';
 import Input from './components/Input';
 import languageContext from './contexts/language';
 import LanguagePicker from './components/LanguagePicker';
-import { SuccessProvider } from './contexts/success';
+import successContext from './contexts/success';
 import Congrats from './components/Congrats';
 import GuessedWords from './components/GuessedWords';
 import { GuessedWordsProvider } from './contexts/guessedWords';
@@ -49,10 +49,10 @@ function App() {
       <languageContext.Provider value={state.language}>
         <LanguagePicker setLanguage={setLanguage} />
         <GuessedWordsProvider>
-          <SuccessProvider>
+          <successContext.SuccessProvider>
             <Congrats />
             <Input secretWord={state.secretWord} />
-          </SuccessProvider>
+          </successContext.SuccessProvider>
           <GuessedWords />
         </GuessedWordsProvider>
       </languageContext.Provider>

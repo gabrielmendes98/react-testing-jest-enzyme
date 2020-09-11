@@ -4,11 +4,14 @@ import { mount, ReactWrapper } from 'enzyme';
 import { findByTestAttr } from '../../../tests/testUtils';
 import Input from './index';
 import languageContext from '../../contexts/language';
+import successContext from '../../contexts/success';
 
-const setup = ({ secretWord = 'party', language = 'en' } = {}) =>
+const setup = ({ secretWord = 'party', language = 'en', success = false } = {}) =>
   mount(
     <languageContext.Provider value={language}>
-      <Input secretWord={secretWord} />
+      <successContext.SuccessProvider value={{ success, setSuccess: jest.fn() }}>
+        <Input secretWord={secretWord} />
+      </successContext.SuccessProvider>
     </languageContext.Provider>
   );
 
@@ -68,4 +71,9 @@ describe('language context', () => {
     const button = findByTestAttr(wrapper, 'submit-button');
     expect(button.text()).toEqual('Enviar');
   });
+});
+
+test('input component does not show when success is true', () => {
+  const wrapper = setup({ secretWord: 'party', success: true });
+  expect(wrapper.isEmptyRender).toBe(true);
 });

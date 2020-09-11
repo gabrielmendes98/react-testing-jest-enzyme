@@ -9,9 +9,9 @@ import successContext from '../../contexts/success';
 const setup = ({ success = false, language = 'en' } = {}) =>
   mount(
     <languageContext.Provider value={language}>
-      <successContext.Provider value={[success, jest.fn()]}>
+      <successContext.SuccessProvider value={{ success, setSuccess: jest.fn() }}>
         <Congrats />
-      </successContext.Provider>
+      </successContext.SuccessProvider>
     </languageContext.Provider>
   );
 

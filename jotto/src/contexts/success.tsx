@@ -1,25 +1,28 @@
 import React from 'react';
 
-const successContext = React.createContext([] as (boolean | React.Dispatch<React.SetStateAction<boolean>>)[]);
+interface ContextProps {
+  success: boolean;
+  setSuccess: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const successContext = React.createContext<ContextProps | undefined>(undefined);
 
 const useSuccess = () => {
   const context = React.useContext(successContext);
 
-  if (context.length === 0) {
+  if (!context) {
     throw new Error('useSuccess must be used within a SuccessProvider');
   }
 
   return context;
 };
 
-const SuccessProvider: React.FC = (props) => {
+const SuccessProvider = (props: any) => {
   const [success, setSuccess] = React.useState(false);
 
-  const value = React.useMemo(() => [success, setSuccess], [success]);
+  const value = React.useMemo(() => ({ success, setSuccess }), [success]);
 
   return <successContext.Provider value={value} {...props}></successContext.Provider>;
 };
 
-export { SuccessProvider, useSuccess };
-
-export default successContext;
+export default { SuccessProvider, useSuccess };

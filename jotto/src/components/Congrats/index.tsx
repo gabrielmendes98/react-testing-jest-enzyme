@@ -5,7 +5,7 @@ import stringsModule from '../../lib/strings';
 import successContext from '../../contexts/success';
 
 const Congrats = () => {
-  const [success] = React.useContext(successContext);
+  const { success } = successContext.useSuccess();
   const language = React.useContext(languageContext);
   return (
     <div data-test="component-congrats">
